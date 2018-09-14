@@ -1,0 +1,90 @@
+Sub adiciona_comentario()
+    Dim sld As slide
+    Dim datahora As String
+    
+    Set sld = Application.ActiveWindow.View.slide
+    datahora = "atualizado em " & Str(Now)
+    
+    AddComment ActivePresentation.Slides(sld.SlideNumber), datahora, "Usuario", "iniciais"
+End Sub
+
+Sub AddComment(oSl As slide, sText As String, _
+    Optional sAuthor As String = "", _
+    Optional sAuthorInitials As String = "XX", _
+    Optional sngTop As Single = 100, Optional sngLeft As Single = 100)
+
+    With oSl
+        .Comments.Add sngLeft, sngTop, sAuthor, sAuthorInitials, sText
+    End With
+
+End Sub
+
+
+Sub ajusta_figura()
+    Dim oSh As Shape
+    
+    sld 2, 60, 97, 417, 834
+    
+    '/*Indicadores de Credito
+    sld 17, 31, 126, 287, 898
+    sld 18, 31, 126, 287, 898
+    sld 19, 31, 126, 287, 898
+    'Indicadores de Credito*/
+    
+    '/*Carteira de Credito
+    sld 25, 55, 119, 350, 850 '934.2992
+    sld 24, 55, 119, 350, 850 '934.2992
+    'Carteira de Credito*/
+    
+    '/*20maiores
+    sld 20, 14, 80, 425, 911
+    sld 21, -123, 21, 87, 88
+    sld 22, -123, 21, 87, 88
+    '20maiores*/
+End Sub
+Sub sld(sld As Integer, l As Double, t As Double, h As Double, w As Double)
+    Dim oSh As Shape
+    
+    'Cabeçalhos
+    Set oSh = ActivePresentation.Slides(sld).Shapes(1)
+    ' .PasteSpecial returns a ShapeRange; the (1) at the end of the line above
+    ' returns the first shape in the range. W/o that, you get a type mismatch error
+    ' from trying to assign a range to a shape
+    
+    With oSh
+       ' Set position:
+      .Left = 14
+      .Top = 11
+       ' Set size:
+      .Height = 53
+      .Width = 652
+    End With
+    
+    Set oSh = ActivePresentation.Slides(sld).Shapes(4)
+    ' .PasteSpecial returns a ShapeRange; the (1) at the end of the line above
+    ' returns the first shape in the range. W/o that, you get a type mismatch error
+    ' from trying to assign a range to a shape
+
+    With oSh
+       ' Set position:
+      .Left = l
+      .Top = t
+       ' Set size:
+       .LockAspectRatio = msoFalse
+      .Height = h
+      .Width = w
+    End With
+    
+End Sub
+
+Sub tamanho()
+
+    Set oSh = ActivePresentation.Slides(2).Shapes(4)
+        
+    h = oSh.Height
+    w = oSh.Width
+    
+    t = oSh.Top
+    l = oSh.Left
+
+End Sub
